@@ -1,4 +1,4 @@
-package main
+package get_jwt
 
 import (
 	"encoding/base64"
