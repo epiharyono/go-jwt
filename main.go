@@ -3,7 +3,6 @@ package get_jwt
 import (
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"strings"
 )
 
@@ -18,14 +17,12 @@ func GetID() int64 {
 	// Split the JWT into its parts
 	parts := strings.Split(jwt, ".")
 	if len(parts) != 3 {
-		fmt.Println("Invalid JWT")
 		return 0
 	}
 
 	// Decode the header
 	headerBytes, err := base64.RawURLEncoding.DecodeString(parts[1])
 	if err != nil {
-		fmt.Println("Error decoding header:", err)
 		return 0
 	}
 
@@ -33,11 +30,9 @@ func GetID() int64 {
 	var header JWTHeader
 	err = json.Unmarshal(headerBytes, &header)
 	if err != nil {
-		fmt.Println("Error unmarshalling header:", err)
 		return 0
 	}
 
 	// Print the decoded header
-	fmt.Printf("Decoded JWT Header: %+v\n", header.Sub)
 	return header.Sub
 }
